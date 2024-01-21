@@ -1,7 +1,9 @@
 import { launch } from 'chrome-launcher'
 import chromium from '@sparticuz/chromium-min'
 import CDP from 'chrome-remote-interface'
+import { DEFAULT_INTERCEPT_RESOLUTION_PRIORITY } from 'puppeteer'
 import puppeteer from 'puppeteer-extra'
+import AdblockerPlugin from 'puppeteer-extra-plugin-adblocker'
 import Xvfb from 'xvfb'
 import clc from 'cli-color'
 import { request } from 'undici'
@@ -82,6 +84,13 @@ export const puppeteerRealBrowser = async (args: Args) => {
     browserWSEndpoint: responseData.webSocketDebuggerUrl,
     agent: responseData['User-Agent']
   }
+
+  puppeteer.use(
+    AdblockerPlugin({
+      // Optionally enable Cooperative Mode for several request interceptors
+      interceptResolutionPriority: DEFAULT_INTERCEPT_RESOLUTION_PRIORITY
+    })
+  )
 
   const browser = await puppeteer.connect({
     targetFilter: (target) => !!target.url(),
