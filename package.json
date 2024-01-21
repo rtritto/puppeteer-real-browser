@@ -19,9 +19,11 @@
   "license": "ISC",
   "dependencies": {
     "@sparticuz/chromium-min": "^119.0.2",
+    "adm-zip": "^0.5.10",
     "chrome-launcher": "^1.1.0",
     "chrome-remote-interface": "^0.33.0",
     "cli-color": "^2.0.3",
+    "github-util": "github:rtritto/github-util",
     "puppeteer": "^21.6.1",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-adblocker": "^2.13.6",
@@ -29,6 +31,7 @@
     "xvfb": "^0.4.0"
   },
   "devDependencies": {
+    "@types/adm-zip": "^0.5.5",
     "@types/chrome-remote-interface": "^0.31.14",
     "@types/cli-color": "^2.0.6",
     "@yarnpkg/sdks": "^3.1.0",

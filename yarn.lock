@@ -422,6 +422,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/adm-zip@npm:^0.5.5":
+  version: 0.5.5
+  resolution: "@types/adm-zip@npm:0.5.5"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: 4976dc61e33534ecfb7eee87e8a587db06420a4eb9f34eee9425aece82e9fdd01ddd22677ff6430c582f4d9735c7d714c71adb8f149e3511bc189501b4113631
+  languageName: node
+  linkType: hard
+
 "@types/cacheable-request@npm:^6.0.1":
   version: 6.0.3
   resolution: "@types/cacheable-request@npm:6.0.3"
@@ -676,6 +685,13 @@ __metadata:
   version: 2.0.0
   resolution: "abbrev@npm:2.0.0"
   checksum: f742a5a107473946f426c691c08daba61a1d15942616f300b5d32fd735be88fef5cba24201757b6c407fd564555fb48c751cfa33519b2605c8a7aadd22baf372
+  languageName: node
+  linkType: hard
+
+"adm-zip@npm:^0.5.10":
+  version: 0.5.10
+  resolution: "adm-zip@npm:0.5.10"
+  checksum: 1f391a4e02940688b6ca6d4b3ea96cc82a9dbe1596671d7dbc052f9a53ed2efa6ba9ba253f032ea16e70081f22d6ddd1af2d65d6be700853cdee9c2fc925c20e
   languageName: node
   linkType: hard
 
@@ -1684,6 +1700,15 @@ __metadata:
     debug: "npm:^4.3.4"
     fs-extra: "npm:^8.1.0"
   checksum: 50ef3e0b76d202c41f4878e5d9f44ff125ce4ccc7a9f6a54d51bc633bf643e5e044cacdf5944a2554cdd2e10b7e92628e694b35ff2b943271afd37cde9570d5d
+  languageName: node
+  linkType: hard
+
+"github-util@github:rtritto/github-util":
+  version: 1.0.0
+  resolution: "github-util@https://github.com/rtritto/github-util.git#commit=28cab7a392f2a5b7622174f18f0a0f66e8e2b8ea"
+  dependencies:
+    undici: "npm:^6.4.0"
+  checksum: 7c6eb24a486c8e2f4bf1e82525f4cf8b2257821d78e2900fefb36c057bba75b7e3e07788825b3e428cc302379e70c60a9b708f145b91608bf01f068e6a3f607a
   languageName: node
   linkType: hard
 
@@ -2715,12 +2740,15 @@ __metadata:
   resolution: "puppeteer-real-browser@workspace:."
   dependencies:
     "@sparticuz/chromium-min": "npm:^119.0.2"
+    "@types/adm-zip": "npm:^0.5.5"
     "@types/chrome-remote-interface": "npm:^0.31.14"
     "@types/cli-color": "npm:^2.0.6"
     "@yarnpkg/sdks": "npm:^3.1.0"
+    adm-zip: "npm:^0.5.10"
     chrome-launcher: "npm:^1.1.0"
     chrome-remote-interface: "npm:^0.33.0"
     cli-color: "npm:^2.0.3"
+    github-util: "github:rtritto/github-util"
     puppeteer: "npm:^21.6.1"
     puppeteer-extra: "npm:^3.3.6"
     puppeteer-extra-plugin-adblocker: "npm:^2.13.6"

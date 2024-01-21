@@ -1,4 +1,4 @@
-import { launch } from 'chrome-launcher'
+import { launch, Launcher } from 'chrome-launcher'
 import chromium from '@sparticuz/chromium-min'
 import CDP from 'chrome-remote-interface'
 import { DEFAULT_INTERCEPT_RESOLUTION_PRIORITY } from 'puppeteer'
@@ -7,6 +7,7 @@ import AdblockerPlugin from 'puppeteer-extra-plugin-adblocker'
 import Xvfb from 'xvfb'
 import clc from 'cli-color'
 import { request } from 'undici'
+import { getExtensionFilePaths } from '@/puppeteerUtils/extensions'
 
 interface Args {
   proxy?: {
@@ -18,6 +19,7 @@ interface Args {
   action?: string,
   headless?: boolean,
   executablePath?: string
+  extensionPath?: boolean
 }
 
 export const puppeteerRealBrowser = async (args: Args) => {
@@ -38,10 +40,25 @@ export const puppeteerRealBrowser = async (args: Args) => {
     }
   }
 
-  const flags = [
-    '--no-sandbox'
-    //'--headless'
-  ]
+  // https://pptr.dev/guides/chrome-extensions
+  const flags = Launcher.defaultFlags().filter((flag) => flag !== '--disable-extensions')
+
+  if (args.extensionPath === true) {
+    const extensionPaths = getExtensionFilePaths()
+
+    for (const filepath of extensionPaths) {
+      flags.push(
+        `--disable-extensions-except=${filepath}`,
+        `--load-extension=${filepath}`
+      )
+    }
+  }
+
+  // flags.push(
+  //   '--enable-automation'
+  //   '--no-sandbox'
+  //   '--headless'
+  // )
 
   if (args.proxy && args.proxy.host && args.proxy.host.length > 0) {
     flags.push(`--proxy-server=${args.proxy.host}:${args.proxy.port}`)
@@ -70,7 +87,8 @@ export const puppeteerRealBrowser = async (args: Args) => {
 
   const chrome = await launch({
     chromePath: await getExecutablePath(),
-    chromeFlags: flags
+    chromeFlags: flags,
+    ignoreDefaultFlags: true
   })
   const protocol = await CDP({ port: chrome.port })
 
