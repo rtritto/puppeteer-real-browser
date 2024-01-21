@@ -304,13 +304,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sparticuz/chromium@npm:^119.0.2":
+"@sparticuz/chromium-min@npm:^119.0.2":
   version: 119.0.2
-  resolution: "@sparticuz/chromium@npm:119.0.2"
+  resolution: "@sparticuz/chromium-min@npm:119.0.2"
   dependencies:
     follow-redirects: "npm:^1.15.3"
     tar-fs: "npm:^3.0.4"
-  checksum: 61a56d434df85dfaed9479989c7a8052dff108c7c3232b13860d7ad807f59b22c0710e73b6d49dd365cee3b632e7a2449c09282638eba1d4920435e958a2b85f
+  checksum: d2619dd81312dc2f46bb993611adb25150b8fb65c65cd4292e82e0cc7eab87d0e3a8458b32b838a16ee2bc028f0e9dde8f8fb2fdbb17b02979d89077a70dbc45
   languageName: node
   linkType: hard
 
@@ -2414,7 +2414,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "puppeteer-real-browser@workspace:."
   dependencies:
-    "@sparticuz/chromium": "npm:^119.0.2"
+    "@sparticuz/chromium-min": "npm:^119.0.2"
     "@types/chrome-remote-interface": "npm:^0.31.14"
     "@types/cli-color": "npm:^2.0.6"
     "@yarnpkg/sdks": "npm:^3.1.0"

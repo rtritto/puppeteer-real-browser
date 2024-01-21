@@ -1,5 +1,5 @@
 import { launch } from 'chrome-launcher'
-import chromium from '@sparticuz/chromium'
+import chromium from '@sparticuz/chromium-min'
 import CDP from 'chrome-remote-interface'
 import puppeteer from 'puppeteer-extra'
 import Xvfb from 'xvfb'
