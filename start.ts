@@ -16,9 +16,10 @@ const { browser, page } = await puppeteerRealBrowser({ /* extensionPath: true */
 
 const filter = ''
 
-for (let i = 0; i < 20; i++) {
+let len = 1
+
+for (let i = 0; i < len; i++) {
   const pageNumber = i + 1
-  console.log(`pageNumber: ${pageNumber}/20`)
   const urlExt = getUrlExt(filter, pageNumber)
   await page.goto(urlExt, { waitUntil: 'domcontentloaded' })
   if (pageNumber === 1) {
@@ -27,6 +28,15 @@ for (let i = 0; i < 20; i++) {
   await page.waitForSelector('tbody')
   const html = await page.content()
   const root = parse(html)
+
+  //#region set len
+  if (pageNumber === 1) {
+    const paginationBlock = root.querySelector('.pagination-block')
+    const pageLink = paginationBlock?.querySelectorAll('a.page-link')
+    len = parseInt(pageLink?.at(-2)?.rawText as string)
+  }
+  console.log(`pageNumber: ${pageNumber}/${len}`)
+  //#endregion
 
   const tbody = root.querySelector('tbody')
   const tds = tbody?.querySelectorAll('td.text-left')
