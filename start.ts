@@ -5,7 +5,8 @@ import { request } from 'undici'
 // import { downloadExtensions, extractZipExtensions } from '@/puppeteerUtils/extensions.ts'
 import { resolveCF } from '@/puppeteerUtils/resolveCloudflare'
 
-const getUrlExt = (filter: string, page: number) => `https://ext.to/search/${filter}/${page}/?order=seed&sort=desc&c=movies`
+const getUrlExt = (filter: string, page: number) => `https://ext.to/search/${filter}/${page}`
+// const getUrlExt = (filter: string, page: number) => `https://ext.to/search/${filter}/${page}/?order=seed&sort=desc&c=movies`
 const URL_EXT_RESET = 'https://ext.to/ajax/torrentUpdatePeers.php'
 const MAX_CONCURRENT_REQUESTS = 5
 
@@ -23,6 +24,7 @@ for (let i = 0; i < len; i++) {
   const urlExt = getUrlExt(filter, pageNumber)
   await page.goto(urlExt, { waitUntil: 'domcontentloaded' })
   if (pageNumber === 1) {
+    console.log(`urlExt: ${urlExt}`)
     await resolveCF(page)
   }
   await page.waitForSelector('tbody')
