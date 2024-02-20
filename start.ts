@@ -5,7 +5,7 @@ import { request } from 'undici'
 // import { downloadExtensions, extractZipExtensions } from '@/puppeteerUtils/extensions.ts'
 import { resolveCF } from '@/puppeteerUtils/resolveCloudflare'
 
-const getUrlExt = (filter: string, page: number) => `https://ext.to/search/${filter}/${page}`
+const getUrlExt = (filter: string, page: number) => `https://ext.to/search/${filter}/${page}/?order=age&sort=desc`
 // const getUrlExt = (filter: string, page: number) => `https://ext.to/search/${filter}/${page}/?order=seed&sort=desc&c=movies`
 const URL_EXT_RESET = 'https://ext.to/ajax/torrentUpdatePeers.php'
 const MAX_CONCURRENT_REQUESTS = 5
@@ -18,6 +18,8 @@ const { browser, page } = await puppeteerRealBrowser({ /* extensionPath: true */
 const filter = ''
 
 let len = 1
+
+const urls = []
 
 for (let i = 0; i < len; i++) {
   const pageNumber = i + 1
@@ -37,7 +39,7 @@ for (let i = 0; i < len; i++) {
     const pageLink = paginationBlock?.querySelectorAll('a.page-link')
     len = parseInt(pageLink?.at(-2)?.rawText as string)
   }
-  console.log(`pageNumber: ${pageNumber}/${len}`)
+  console.log(`current pageNumber: ${pageNumber}/${len}`)
   //#endregion
 
   const tbody = root.querySelector('tbody')
@@ -48,18 +50,22 @@ for (let i = 0; i < len; i++) {
     ?.querySelector('a.dwn-btn.torrent-dwn')
     ?.getAttribute('data-id')
   ) as string[]
-  for (let i = 0, len = dataIds.length; i < len; i += MAX_CONCURRENT_REQUESTS) {
-    const chunk = dataIds.slice(i, i + MAX_CONCURRENT_REQUESTS)
-    await Promise.all(chunk.map((dataId) => request(URL_EXT_RESET, {
-      method: 'POST',
-      body: `id=${dataId}`,
-      headers: {
-        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-        'x-requested-with': 'XMLHttpRequest'
-      }
-    }).then(async (r) => console.log(await r.body.json()))))
-  }
+
+  urls.push(...dataIds)
 }
 
 await browser.close()
-console.log('END!');
+
+for (let i = 0, len = urls.length; i < len; i += MAX_CONCURRENT_REQUESTS) {
+  const chunk = urls.slice(i, i + MAX_CONCURRENT_REQUESTS)
+  await Promise.all(chunk.map((dataId) => request(URL_EXT_RESET, {
+    method: 'POST',
+    body: `id=${dataId}`,
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      'x-requested-with': 'XMLHttpRequest'
+    }
+  }).then(async (r) => console.log(await r.body.json()))))
+}
+
+console.log('END!')
