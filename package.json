@@ -19,17 +19,17 @@
   "author": "zfc-software",
   "license": "ISC",
   "dependencies": {
-    "@sparticuz/chromium-min": "^119.0.2",
+    "@sparticuz/chromium-min": "^122.0.0",
     "adm-zip": "^0.5.10",
     "chrome-launcher": "^1.1.0",
     "chrome-remote-interface": "^0.33.0",
-    "cli-color": "^2.0.3",
+    "cli-color": "^2.0.4",
     "github-util": "github:rtritto/github-util",
     "node-html-parser": "^6.1.12",
-    "puppeteer": "^21.6.1",
+    "puppeteer": "^22.4.1",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-adblocker": "^2.13.6",
-    "undici": "^6.4.0",
+    "undici": "^6.7.1",
     "xvfb": "^0.4.0"
   },
   "devDependencies": {
@@ -37,8 +37,8 @@
     "@types/chrome-remote-interface": "^0.31.14",
     "@types/cli-color": "^2.0.6",
     "@yarnpkg/sdks": "^3.1.0",
-    "tsx": "^4.7.0",
-    "typescript": "^5.3.3"
+    "tsx": "^4.7.1",
+    "typescript": "^5.4.2"
   },
   "repository": {
     "type": "git",
@@ -46,5 +46,5 @@
   },
   "readme": "README.md",
   "homepage": "https://github.com/zfcsoftware/puppeteer-real-browser",
-  "packageManager": "yarn@4.0.2"
+  "packageManager": "yarn@4.1.1"
 }
